@@ -1,5 +1,6 @@
 import csv
-from fastapi import FastAPI, Request, Response, logger
+from fastapi import FastAPI, Request, Response, logger, FileResponse
+import pandas as pd
 
 app = FastAPI()
 
@@ -16,4 +17,8 @@ async def log_error(request: Request):
         writer.writerow([error_message])
     # Return a success response
     return {"status": "SUCCESS"}
-    
+
+@app.get("/csv")
+async def get_csv():
+    df = pd.read_csv("./errors.csv")
+    return FileResponse(df.to_csv, media_type="text/csv")
