@@ -7,8 +7,8 @@ app = FastAPI()
 async def log_error(request: Request):
     # Parse the JSON-encoded error message from the request
     requestInfo = await request.json()
-    logger.info(type(requestInfo))
-    logger.info(requestInfo)
+    print(type(requestInfo))
+    print(requestInfo)
     #error_message = requestInfo["error"]
 
     # Open the CSV file in append mode
