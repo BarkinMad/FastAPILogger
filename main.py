@@ -4,9 +4,9 @@ from fastapi import FastAPI, Request, Response, logger
 app = FastAPI()
 
 @app.post("/log-error")
-def log_error(request: Request, response: Response):
+async def log_error(request: Request, response: Response):
     # Parse the JSON-encoded error message from the request
-    error_message = request.json().get("error")
+    error_message = await request.json()["error"]
 
     # Open the CSV file in append mode
     with open("errors.csv", "a") as csvfile:
